@@ -1,0 +1,31 @@
+name: Test Project
+# "on" is a workflow trigger defined by an event
+# for example: whenever a new push happens
+on: push
+# jobs to run
+jobs:
+  # job name
+  test:
+    # runs on ubuntu-latest
+    runs-on: ubuntu-latest
+    # steps to run
+    steps:
+      # get code from the repository (official github action)
+      - name: Get code
+      # "uses" is for pre-defined actions
+      # and can specify the version of the action
+        uses: actions/checkout@v3
+      # a "with" keyword may be needed if there are 
+      # dependencies to are needed for a specified 
+      # "action"
+      # a runner might not have the dependencies
+      # if it isn't installed
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        # npm ci is safer than npm install
+        run: npm ci
+      - name: Run tests
+        run: npm test
