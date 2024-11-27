@@ -1,7 +1,8 @@
 name: Deploy Project
 # "on" is a workflow trigger defined by an event
 # for example: whenever a new push happens
-on: push
+# workflow_dispatch is a manual trigger
+on: [push, workflow_dispatch]
 # jobs to run
 jobs:
   # job name
